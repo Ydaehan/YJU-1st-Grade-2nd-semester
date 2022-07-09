@@ -66,6 +66,26 @@ for cValue in checkRlist:
 #  11 ~ 15 : *****
 #  16 ~ 20 : ******
 
-# 갯수 가 col
+# 갯수 가 row
+
+a = 0
+b = 0
+c = 0
+d = 0
+
 for row in copyList:
-    for col in range(4):
+    if  row >= 1 and row <= len(copyList) / 4:
+        a += 1
+    elif row >= 6 and row <= (len(copyList) / 4) * 2:
+        b += 1
+    elif row >= 11 and row <= (len(copyList) / 4) * 3:
+        c += 1
+    else :
+        d += 1
+
+print("구간별 히스토그램")
+print("1 ~ 5 : "  ,"*" * a)
+print("6 ~ 10 : " ,"*" * b)
+print("11 ~ 15 : ","*" * c)
+print("16 ~ 20 : ","*" * d)
+
