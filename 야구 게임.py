@@ -1,99 +1,111 @@
-# random 함수 호출
+# random 함수를 사용 하기 위해 random 호출
 import random
-# 시도 횟수 변수 선언
-tryCount = 0
-out = 0 # out count 변수
-randList = [] # 난수 3개 를 저장할 리스트 생성
-# 0 ~ 9 사이의 정수 3개 난수로 생성
+
+# 난수값 리스트 선언
+randNumList = []
+
+# 중복 값이 안생기게 
+# 정수의 범위는 0 ~ 9 사이
 while True:
-    randNum = random.randint(0,9)
-    # 중복 값 발생 할 수 있음
-    # 중복 값 배제
-    if randNum not in randList:
-        # 그 후 리스트에 저장
-        randList.append(randNum)
-    if len(randList) == 3:
-        break
-while True :
-    # 시도 횟수 출력
-    tryCount += 1
-    print("시도 횟수:",tryCount) 
-    # 키보드로 부터 0 ~ 9 사이 정수 3개 입력 받고 결과 값을 출력
-    myList = [] # 입력 받은 수를 저장 할 리스트
-    print("정수 3개를 입력하세요.")
+    randNum = random.randint(0,9)  # 0 ~ 9 사이 3개의 정수를 난수로 받기
+    if randNum in randNumList:
+        continue
+    else:
+        randNumList.append(randNum) # 받은 난수 3개를 리스트로 저장 (추후 사용)
+        if len(randNumList) == 3:
+            break
+
+# 키보드로 부터 0 ~ 9 사이 정수 3개를 입력받고
+# 결과 값 출력
+# 중복 값 처리 
+
+
+# 시도 횟수를 출력하기 위한 변수 선언
+tryCount = 1
+out = 0 # out 은 2번 당하면 GAME OVER 당함으로 
+        # while문 밖에 선언
+while True:
+    myList = [] # 사용자가 입력한 수를 받을 리스트 선언 
+    # 시도 할때 마다 초기화 시켜줘야 새로운 값을 입력 받음
+    # 시도 횟수를 출력
+    print("시도 횟수 :",tryCount)
+    print("정수 3개를 입력하세용~~~^^7")
     while True:
-        inputNum = int(input()) # 0 ~ 9 사이 정수 입력
+        inputNum = int(input())
         if inputNum < 0 or inputNum > 9:
-            print("0 ~ 9 사이 정수를 입력해주세요.")
+            print("입력 가능 범위가 아닙니다. 0 ~ 9 사이 정수를 입력하세요.")
             continue
-        elif inputNum in myList:# 입력 값의 중복 값 배제
-            print("이미 입력한 값 입니다. 다시 입력하세요.")
-            continue
-        else:
+        
+        if inputNum not in myList:
             myList.append(inputNum)
             if len(myList) == 3:
                 break
+        else:
+            print("중복 된 수 입니다. 다시 입력 하세요.")
+            continue
+        
+        
     # strike ball out 판단
-    # strike ball 선언 (out은 while 문 밖에 선언)
-    strike = 0
-    ball = 0
-    # 리스트에서 값을 하나씩 불러와서 
-    # 두 리스트의 값을 비교하고
-    # 두 리스트의 인덱스 값을 표시할 변수 선언
+    # 출력
+    # 인덱스 위치 비교를 위한 난수와 사용자 의 인덱스 변수 선언
     randIndex = 0
-    # 두 리스트의 인덱스 (위치)값을 비교해서 판단 후
-    for checkRandNum in randList:
-        myIndex = 0 # 밑의 for 문을 반복후 나와서 다시돌때 초기화
-        for checkMyNum in myList:
-            if checkRandNum == checkMyNum and randIndex == myIndex:
+    myIndex = 0
+    strike = 0 # strike 와 ball 은 반복을 하며 초기화를 
+    ball = 0   # 시켜야 하기 때문에 while 문 내에 선언 하여 초기화
+    for randValue in randNumList:
+        myIndex = 0
+        for myValue in myList:
+            if myValue == randValue and myIndex == randIndex: # strike = 입력 값과 난수 값이 같으며 인덱스 위치가 같을때
                 strike += 1
-            elif checkRandNum == checkMyNum and randIndex != myIndex:
+            elif myValue == randValue and myIndex != randIndex: # ball = 입력 값과 난수 값이 같은게 있지만 인덱스 위치가 다를 때
                 ball += 1
-            myIndex += 1
-        randIndex += 1
-    # strike ball 출력
-    # strike ball count 가 둘 다 0 이면 outCount += 1
+            myIndex += 1 # 내부 반복문이 돌때 마다 myIndex + 1 
+        randIndex += 1 # 외부 반복문이 돌때 마다 randIndex + 1
+    # out은 strike 와 ball count 가 0 일때 count += 1
+    # out 2번 당하면 msg 출력 후 게임오버
+    if strike == 0 and ball == 0:
+        out += 1
+        if out == 2:
+            print()
+            print("-"*20)
+            print("\tGAME OVER")
+            print("\tOut 2번")
+            print("아까비~~~졌네용")
+            print("정답은 : ",end="")
+            for value in randNumList:
+                print(value," ",end="")
+            print("입니다.")
+            print("-"*20)
+            break
+        print("Out :","아웃",out,"번")
+    # strike 출력    
     if strike > 0 :
-        print(strike,"strike")
+        print(strike,"strike"," ",end="")
+        if strike == 3:
+            print()
+            print("-"*20)
+            print("WINNER!!")
+            print("정답은 : ",end="")
+            for value in randNumList:
+                print(value," ",end="")
+            print("입니다.")
+            print("-"*20)
+            break
+    # ball 출력
     if ball > 0 :
         print(ball,"ball")
-    if strike == 0 and ball == 0 : 
-        out += 1
-        print("OUT : 아웃",out,"번")
-    
-    # 시도 횟수 >= 5
+    tryCount += 1
+    # 시도 횟수가 5회 되거나 그 이상일때 msg 출력 후 game over
     if tryCount >= 5:
+        print()
         print("-"*20)
-        print("게임 횟수 초과")
-        print("아까비~~~~졌네용..")
-        print("정답은:",end="")
-        for value in randList:
-            print(value," ",end="")
-        print("입니다.")
-        print("-"*20) 
-        break
-    # out == 2
-    elif out == 2:
-        print("-"*20)
-        print("GAME OVER")
-        print("2 Out 당했네요..")
-        print("아까비~~~~졌네용..")
-        print("정답은:",end="")
-        for value in randList:
-            print(value," ",end="")
-        print("입니다.")
-        print("-"*20) 
-        break
-    elif strike == 3 :
-        print("-"*20)
-        print("Win!!")
-        print("축하합니다!")
-        print("정답입니다!")
-        print("정답은:",end="")
-        for value in randList:
+        print("\tGAME OVER")
+        print("게임횟수 초과")
+        print("아까비~~~졌네용..")
+        print("정답은 : ",end="")
+        for value in randNumList:
             print(value," ",end="")
         print("입니다.")
         print("-"*20)
         break
-    # 이면 게임횟수 초과 or 2out 게임 오버
 
