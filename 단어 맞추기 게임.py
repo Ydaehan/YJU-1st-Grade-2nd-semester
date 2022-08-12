@@ -25,11 +25,9 @@ def randBlindWord(argGameWord):
     # 선택 된 단어의 글자 중 50 % 를 Blind 처리
     # 올림 처리
     blindWordNum = len(argGameWord) / 2
-    print(blindWordNum)
     decimalPoint = int(blindWordNum + 1) - blindWordNum
     if decimalPoint != 1:
         blindWordNum += decimalPoint
-    print(blindWordNum)
     # 정수로 올림 처리 후 blind 처리
     while len(blindIndexList) < blindWordNum:
         a = random.randint(0, len(argGameWord) - 1)
