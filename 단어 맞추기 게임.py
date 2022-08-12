@@ -31,9 +31,10 @@ def randBlindWord(argGameWord):
     # 정수로 올림 처리 후 blind 처리
     while len(blindIndexList) < blindWordNum:
         a = random.randint(0, len(argGameWord) - 1)
-        if a not in blindIndexList:
-            blindIndexList.append(a)
-    
+        # 블라인드 처리된 수가 아닌 다른 수를 받은 경우
+        if a not in blindIndexList: 
+            blindIndexList.append(a)    # 블라인드 인덱스 리스트에 저장
+    # 이미 블라인드 처리된 수를 받을 경우는 다시 받기
 # 알파벳을 입력 받고 매칭 시켜 블라인드 해제
 def matchingStart(argGameWord,argTryCount):
     includeCount = 0    # 포함 카운트
@@ -41,6 +42,7 @@ def matchingStart(argGameWord,argTryCount):
     print(argTryCount,"번째 시도, 아래 단어를 구성하는 알파벳 한 개 입력하세요.")
     # blind 처리
     for bIndex in range(len(argGameWord)):
+        # 블라인드 처리 하여 출력
         if bIndex in blindIndexList :
             print("_",end="")
         else :
@@ -63,13 +65,17 @@ def matchingStart(argGameWord,argTryCount):
 userWordList    = []    # 유저 입력 단어 리스트       
 blindIndexList  = []    # 블라인드 한 알파벳의 인덱스 리스트
 tryCount        = 0     # 시도 횟수
-inputWord(3)
-gameWord = selectWord(userWordList)
+inputWord(3)                        # 매개변수 안의 수 만큼 단어 입력 
+gameWord = selectWord(userWordList) # 입력 단어 중 맞출 단어 선택
 print("단어 선택 완료 게임을 시작합니다. 선택된 단어 :",gameWord)
+# 블라인드할 알파벳을 랜덤으로 지정
 randBlindWord(gameWord)
 # startGame
 while True :
-    tryCount = matchingStart(gameWord,tryCount)
+    # matching 이 시작되고 블라인드 된 알파벳을 맞추면 블라인드 해제
+    # 그렇지 않으면 없음 출력
+    tryCount = matchingStart(gameWord,tryCount) # tryCount를 리턴 받음
+    # 블라인드 처리 된 알파벳을 다찾았을때 게임 종료
     if len(blindIndexList) == 0:
         print("Clear - 선택된 단어 :",gameWord," 총 시도 횟수 :",tryCount)
         break
