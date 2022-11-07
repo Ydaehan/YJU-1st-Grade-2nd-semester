@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class quiz1 {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         int selcetMenu = 0;
         int selectDan = 0;
@@ -36,5 +36,6 @@ public class quiz1 {
                 System.out.println("잘못 입력하셨습니다. 다시입력하세요.");
             }
         }
+        scn.close();
     }
 }
