@@ -27,7 +27,7 @@ public class baseballgame {
             }
             computer_num[row] = randnum;
             result += (computer_num[row] + " ");
-            System.out.println(computer_num[row]);
+            //System.out.println(computer_num[row]);
         }
         result += "입니다.";
 

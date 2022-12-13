@@ -12,7 +12,8 @@ public class test1 {
             System.out.println("잘못된 입력 값 입니다. 다시 입력 하세요");
             inputValue = scn.nextInt();
         }
-        if(inputValue <= 100 && inputValue >= 90){
+        // A ~ F 100 을 초과하는지 검사를 또 할 필요가 없다.
+        if(inputValue >= 90){
             grade = 'A';
         }else if (inputValue >= 80){
             grade = 'B';

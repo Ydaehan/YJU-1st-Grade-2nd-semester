@@ -37,6 +37,7 @@ public class practice1 {
         // long pos []; -> 자료형이 long 임에도 pos라는 이름의 4byte 공간이 만들어짐
         // byte kal []; -> 자료형이 byte 임에도 kal이라는 이름의 4byte 공간이 만들어짐
         // 각 배열의 첫번째 원소의 주소값을 저장하기 때문에 운영체제(JVM)에서 32bit 사용하기때문에
+        // Java Virtual Machine
         // 주소값의 크기는 32bit = 4byte 이기때문에 모두 4byte 공간이 만들어짐
 
         // 0 1 2 3  - 4개의 변수를 가지는 배열을 만들고 싶다 
@@ -76,19 +77,19 @@ public class practice1 {
         // 2. SET 값 저장하기
 
         // char bar[] = new char[2]; 에서
-        // new -> 메모리 상의 객체를 생성
-        // 첫번째 원소의 메모리 주소값을 들고 옴
+        // new -> 메모리 상의 객체를 생성  -> 첫번째 원소의 메모리 주소값을 들고 옴
         // shifting 알고리즘 = 자료형사이즈 * index
         
         // 배열을 초기화 하는 방법
+        // 초기화를 하지 않으면 원소의 값은 모두 0으로 초기값 설정됨
         // 1. literal constant (리터럴 상수)
-        // int foo[] = new int[]{10, 20, 30, 40};
+        // int foo[] = {10, 20, 30, 40};
         // char foo[] = {'h','e','l','l','o'}
         // for(int i = 0 ; i < foo.length ; i++){
         //     System.out.print(foo[i]);
         // }
-        // 2. foo loop;
-        // final int NUM_OF_WEIGHT = 6;
+        // 2. for loop;
+        // final int NUM_OF_WEIGHT = 6; 상수화
         // double weight[] = new double[NUM_OF_WEIGHT];
         
         // for ( int i = 0 ; i < weight.length ; i++){
@@ -97,10 +98,96 @@ public class practice1 {
         // for ( int j = 0 ; j < weight.length ; j++){
         //     System.out.println(weight[j]);
         // }
-        
-        
-        // -------------- 여기까지 일차원 배열 ---------------
-        
         //scn.close();
+        // --------------복습--------------------
+        // final int NUM_OF_ELEMENT = 3; //변수 -> 상수 상수의 이름은 모두 대문자로 쓴다 <약속>
+        // int bar[] = new int[NUM_OF_ELEMENT];
+        // // 10, 20, 30
+        // // loop
+        // // java 에서 array는 객체[object] 로 인식한다. 
+        // for(int i = 0, j = 10; i < bar.length; i++, j += 10){
+        //     // 3번 반복, i -> 0, 1, 2
+        //     bar[i] = j;
+        // }
+
+        // for(int i = 0; i < bar.length; i++){
+        //     System.out.print(bar[i] + "\t");
+        // }
+
+        // int bar[] = {2, 3, 4}; // reference variable 참조형 변수
+        
+        // int foo[]; // primitive variable 원시적 변수
+        // -------------- 여기까지 일차원 배열 --------------- 
+        // 2차원 배열
+
+        // scalar -> 한개의 값                      -> primitive variable
+        // vector -> 일차원                         -> 1D Array
+        // Matrix -> 이차원                         -> 2D Array
+        // 관계형 데이터 베이스의 저장 방법과 유사
+        // 이차원 배열에서의 좌표 체계 
+        // 2번째 행의 index 가 3번째의 좌표값        -> (1, 3)
+        // Tensor -> 삼차원 이상 [다차원 배열]       -> 3D >= Array
+        // ROW BY COLUMN -> ROW x COLUMN 배열
+        
+        // 이차원 배열 생성 과정
+        // 배열의 변수 선언
+        // int bar[][]; -> []은 하나의 차원 / 이차원에서의 배열의 변수 선언
+        // 배열의 원소 Element 할당
+        // new int [4][4]; [ROW][COL];
+        // 3. Chainning 배열 변수와 할당된 배열
+        // bar = new int [4][4];
+
+        // 2차원 배열의 초기화
+        // int foo [][] = { {1, 2, 3} , {4, 5, 6}, {7, 8, 9}};
+        // int foo[][] = new int[3][3];
+        // 각 행에서 각 열로 돌아야하기때문에 loop를 2번 써야한다
+        // ROW
+        // int count = 1;
+        // for(int i = 0; i < foo.length; i++){
+        //     // COLUMN
+        //     for(int j = 0; j < foo[i].length; j++){
+        //         foo[i][j] = count;
+        //         count++;
+        //     }
+        // }
+
+        // // print
+        // for(int i = 0; i < foo.length; i++){
+        //     // COLUMN
+        //     for(int j = 0; j < foo[i].length; j++){
+        //         System.out.print(foo[i][j] + "\t");
+        //     }
+        //     System.out.println("");
+        // }
+
+        // java 태생 자체 oop function 대신 method 와 생성자가 있다
+        // 이것은 Class 개념을 알아야 사용 가능
+
+        // 3차원 이상 <Tensor 3D Array>
+        // 3차원 이기 때문에 브라켓은 3개 [][][]
+        // [2][3] 짜리 2 by 3 2D Array를 N개 생성할때 ->
+        // int foo[][][] = new int[N][3][4]; 처럼 생성
+        // 28 by 28 2D Array * 3 을 선언 <3차원으로>
+        // int bar[][][] = new int[3][28][28];
+
+        // 3차원 배열의 초기화
+        // 1. 리터럴 상수
+        // [2][2][2]
+        // int foo[][][] = new int[][][]{ { {1,2},{3,4} },{ {5,6},{7,8} }};
+        // 2. loop
+        // for 문 3개 필요
+        
+        // N번째 Matrix
+        // for(int i = 0 ; i < foo.length; i++){
+        //     // ROW
+        //     for(int j = 0 ; j < foo[i].length; j++){
+        //         // COL
+        //         for(int k = 0 ; k < foo[i][j].length; k++){ 
+        //             System.out.print(foo[i][j][k] + "\t");
+        //         }
+        //         System.out.println("");
+        //     }
+        //     System.out.println("====================");
+        // }
     }
 }
